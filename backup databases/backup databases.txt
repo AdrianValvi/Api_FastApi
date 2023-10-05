@@ -1,0 +1,36 @@
+CREATE TABLE inventario (
+    id_producto INTEGER AUTO_INCREMENT PRIMARY KEY,
+    nombre_producto VARCHAR(100),
+    descripcion VARCHAR(255),
+    precio DECIMAL(10, 2),
+    cantidad_disponible INTEGER
+);
+CREATE TABLE ventas (
+    id_venta INTEGER AUTO_INCREMENT PRIMARY KEY,
+    fecha_venta DATE,
+    id_producto INTEGER,
+    cantidad_vendida INTEGER,
+    precio_unitario DECIMAL(10, 2),
+    total_venta DECIMAL(10, 2),
+    FOREIGN KEY (id_producto) REFERENCES inventario (id_producto)
+);
+................................
+INSERT INTO empleado (num_matricula, nombre, direccion)
+VALUES
+    (1, ' Maria González', 'francisco 201'),
+    (2, ' juan González', 'francisco 301'),
+    (3, ' mario González', 'francisco 401');
+INSERT INTO administrativo (num_matricula, nombre, direccion)
+VALUES
+    (1, ' Maria González', 'francisco 201'),
+    (2, ' juan González', 'francisco 301'),
+    (3, ' mario González', 'francisco 401');
+VALUES
+    (1, ' agua'),
+    (2, ' gas'),
+    (3, ' marino');
+INSERT INTO tecnico (num_matricula, nombre, direccion, nivel, fecha_de_asignacion, fecha_de_cese)
+VALUES
+    (1, 'Juan', 'Miguel Hidalgo 229', 'A2', '2023-09-20', '2024-01-20'),
+    (2, 'Mario', 'Miguel Hidalgo 289', 'A5', '2023-09-20', '2024-01-20'),
+    (3, 'Eliza', 'Miguel Hidalgo 529', 'A2', '2023-09-20', '2024-01-20');

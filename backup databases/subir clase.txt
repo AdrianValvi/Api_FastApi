@@ -1,0 +1,113 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         11.1.2-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.3.0.6589
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Volcando estructura de base de datos para empresa
+CREATE DATABASE IF NOT EXISTS `empresa` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `empresa`;
+
+-- Volcando estructura para tabla empresa.administrativo
+CREATE TABLE IF NOT EXISTS `administrativo` (
+  `num_matricula` int(11) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `direccion` varchar(55) DEFAULT NULL,
+  KEY `num_matricula` (`num_matricula`),
+  CONSTRAINT `administrativo_ibfk_1` FOREIGN KEY (`num_matricula`) REFERENCES `empleado` (`num_matricula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla empresa.administrativo: ~3 rows (aproximadamente)
+DELETE FROM `administrativo`;
+INSERT INTO `administrativo` (`num_matricula`, `nombre`, `direccion`) VALUES
+	(1, ' Maria González', 'francisco 201'),
+	(2, ' juan González', 'francisco 301'),
+	(3, ' mario González', 'francisco 401');
+
+-- Volcando estructura para tabla empresa.departamento
+CREATE TABLE IF NOT EXISTS `departamento` (
+  `id_departamento` int(11) NOT NULL,
+  `nombre_departamento` varchar(35) DEFAULT NULL,
+  PRIMARY KEY (`id_departamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla empresa.departamento: ~0 rows (aproximadamente)
+DELETE FROM `departamento`;
+INSERT INTO `departamento` (`id_departamento`, `nombre_departamento`) VALUES
+	(1, ' agua'),
+	(2, ' gas'),
+	(3, ' marino');
+
+-- Volcando estructura para tabla empresa.empleado
+CREATE TABLE IF NOT EXISTS `empleado` (
+  `num_matricula` int(11) NOT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `direccion` varchar(55) DEFAULT NULL,
+  PRIMARY KEY (`num_matricula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla empresa.empleado: ~3 rows (aproximadamente)
+DELETE FROM `empleado`;
+INSERT INTO `empleado` (`num_matricula`, `nombre`, `direccion`) VALUES
+	(1, ' Maria González', 'francisco 201'),
+	(2, ' juan González', 'francisco 301'),
+	(3, ' mario González', 'francisco 401');
+
+-- Volcando estructura para tabla empresa.proyecto
+CREATE TABLE IF NOT EXISTS `proyecto` (
+  `id_proyecto` int(11) NOT NULL,
+  `nombre_proyecto` varchar(55) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `cliente` varchar(55) DEFAULT NULL,
+  `fecha_de_cese` date DEFAULT NULL,
+  `fecha_de_asignacion` date DEFAULT NULL,
+  PRIMARY KEY (`id_proyecto`),
+  KEY `fecha_de_cese` (`fecha_de_cese`),
+  KEY `fecha_de_asignacion` (`fecha_de_asignacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla empresa.proyecto: ~0 rows (aproximadamente)
+DELETE FROM `proyecto`;
+INSERT INTO `proyecto` (`id_proyecto`, `nombre_proyecto`, `fecha_inicio`, `fecha_fin`, `cliente`, `fecha_de_cese`, `fecha_de_asignacion`) VALUES
+	(1, 'proyecto 4', '2023-09-20', '2024-01-20', 'aceros', '2023-09-20', '2024-01-20'),
+	(2, 'proyecto 5', '2023-09-20', '2024-01-20', 'plasticos', '2023-09-20', '2024-01-20'),
+	(3, 'proyecto 76', '2023-09-20', '2024-01-20', 'payasos', '2023-09-20', '2024-01-20');
+
+-- Volcando estructura para tabla empresa.tecnico
+CREATE TABLE IF NOT EXISTS `tecnico` (
+  `num_matricula` int(11) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `direccion` varchar(55) DEFAULT NULL,
+  `nivel` varchar(55) DEFAULT NULL,
+  `fecha_de_asignacion` date DEFAULT NULL,
+  `fecha_de_cese` date DEFAULT NULL,
+  KEY `num_matricula` (`num_matricula`),
+  KEY `fecha_de_asignacion` (`fecha_de_asignacion`),
+  KEY `fecha_de_cese` (`fecha_de_cese`),
+  CONSTRAINT `tecnico_ibfk_1` FOREIGN KEY (`num_matricula`) REFERENCES `empleado` (`num_matricula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla empresa.tecnico: ~0 rows (aproximadamente)
+DELETE FROM `tecnico`;
+INSERT INTO `tecnico` (`num_matricula`, `nombre`, `direccion`, `nivel`, `fecha_de_asignacion`, `fecha_de_cese`) VALUES
+	(1, 'Juan', 'Miguel Hidalgo 229', 'A2', '2023-09-20', '2024-01-20'),
+	(2, 'Mario', 'Miguel Hidalgo 289', 'A5', '2023-09-20', '2024-01-20'),
+	(3, 'Eliza', 'Miguel Hidalgo 529', 'A2', '2023-09-20', '2024-01-20');
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
